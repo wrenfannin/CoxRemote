@@ -15,10 +15,11 @@
 #include "Free_Fonts.h"
 #include <RemoteXY.h>
 #include <SPI.h>
+#include <Chrono.h>
 #define REMOTEXY_BLUETOOTH_NAME "CoxRemote"
 
 TFT_eSPI tft = TFT_eSPI();
-
+Chrono sw;
 #pragma pack(push, 1)
 uint8_t RemoteXY_CONF[] =   // 118 bytes
   { 255,6,0,0,0,111,0,16,31,1,1,0,2,5,19,19,37,24,83,104,
@@ -48,15 +49,17 @@ void setup()
   tft.init();
   tft.fillScreen(TFT_RED);
   tft.setFreeFont(&FreeSansBoldOblique24pt7b);
-  
 }
 
 void loop() 
 { 
   RemoteXY_Handler ();
   tft.fillScreen(TFT_RED);
+  sw.restart();
   if (RemoteXY.button_0 == 1){
+    sw.resume();
     tft.drawString("Text One",10,120,4);
+    tft.drawFloat(sw.elapsed(),10,50,4);
   }
   if (RemoteXY.button_1 == 1){
     tft.drawString("Text Two",10,120,4);
