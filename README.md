@@ -1,3 +1,14 @@
-# RFPanel
 
-#### ESP32/ESP8266 Based device allowing for wireless communication between a coach's phone & the cox of a rowing boat
+
+#   _____             _____                          _        
+#  / ____|           |  __ \                        | |       
+# | |      ___ __  __| |__) | ___  _ __ ___    ___  | |_  ___ 
+# | |     / _ \\ \/ /|  _  / / _ \| '_ ` _ \  / _ \ | __|/ _ \
+# | |____| (_) |>  < | | \ \|  __/| | | | | || (_) || |_|  __/
+#  \_____|\___//_/\_\|_|  \_\\___||_| |_| |_| \___/  \__|\___|
+                                                             
+                                                             
+
+
+
+### Project allowing a phone to send text prompts straight to the boat's cox.
