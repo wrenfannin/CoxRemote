@@ -17,9 +17,10 @@
 #include <SPI.h>
 #include <Chrono.h>
 #define REMOTEXY_BLUETOOTH_NAME "CoxRemote"
-
+#include <StopWatch.h>
 TFT_eSPI tft = TFT_eSPI();
 Chrono sw;
+StopWatch MySW;
 #pragma pack(push, 1)
 uint8_t RemoteXY_CONF[] =   // 118 bytes
   { 255,6,0,0,0,111,0,16,31,1,1,0,2,5,19,19,37,24,83,104,
@@ -43,23 +44,53 @@ struct {
 } RemoteXY;
 #pragma pack(pop)
 
+unsigned long stopTime;
+unsigned long currentTime;
+const unsigned long period = 5;
+void delayIsh(){
+  stopTime = millis();
+  if (currentTime - stopTime >= period){
+    tft.drawNumber(MySW.elapsed(),20,0,4);
+  }
+ 
+}
+
+
+
 void setup() 
 {
   RemoteXY_Init (); 
+  MySW.setResolution(StopWatch::SECONDS); 
   tft.init();
   tft.fillScreen(TFT_RED);
   tft.setFreeFont(&FreeSansBoldOblique24pt7b);
+  MySW.start();
+ // sw.start();
+}
+void printTime(){
+  tft.drawFloat(MySW.elapsed(),10,50,4);
+  delay(1);
 }
 
 void loop() 
 { 
+currentTime = MySW.elapsed();
+ // delay(0.5);
   RemoteXY_Handler ();
-  tft.fillScreen(TFT_RED);
-  sw.restart();
+  delayIsh();
+ // tft.fillScreen(TFT_RED);
+ // MySW.reset();
+ // MySW.start();
+ // sw.resume();
+  //tft.drawString("Text One",10,120,4);
+  //tft.drawFloat(sw.elapsed(),10,80,4);
+  //printTime();  
+ // tft.drawFloat(MySW.elapsed(),10,50,4);
   if (RemoteXY.button_0 == 1){
-    sw.resume();
-    tft.drawString("Text One",10,120,4);
-    tft.drawFloat(sw.elapsed(),10,50,4);
+  //  MySW.start();
+   // sw.resume();
+  //  tft.drawString("Text One",10,120,4);
+ //   tft.drawChar(MySW.elapsed(),0,50,4);
   }
   if (RemoteXY.button_1 == 1){
     tft.drawString("Text Two",10,120,4);
