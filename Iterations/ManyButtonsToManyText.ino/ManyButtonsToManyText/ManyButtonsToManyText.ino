@@ -43,7 +43,7 @@ struct {
 
 } RemoteXY;
 #pragma pack(pop)
-
+bool runIf = true;
 unsigned long stopTime;
 unsigned long currentTime;
 const unsigned long period = 5;
