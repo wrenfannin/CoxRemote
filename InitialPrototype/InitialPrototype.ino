@@ -31,9 +31,11 @@ struct {
 //////////////////////////////////////////////////////////////////////////
 StopWatch sw;
 TFT_eSPI tft = TFT_eSPI();
-bool runIf = true;
-unsigned long currentMillis = millis();
 
+
+unsigned long previousMillis = 0;     // will store last time LED was updated
+
+const long interval = 1000;  
 
 void setup() 
 {
@@ -47,27 +49,26 @@ void setup()
 
 void loop(){ 
 //tft.drawString("Start Exercise!",50,50,4);
+  unsigned long currentMillis=millis();
 tft.fillScreen(toInt(203,135,71));
   RemoteXY_Handler ();
+  if(currentMillis - previousMillis >= interval) {
+  previousMillis = currentMillis;
   if (RemoteXY.startExercise ==1){
       if (runIf == true){
       tft.fillScreen(toInt(203,135,71));
       tft.drawString("Start Exercise!",50,50,4);
       sw.start();
       tft.drawFloat(sw.elapsed(),50,10,4);
-      runIf = false;
+      
     }
-  delay(190);
-  runIf = true;
+  }
+  
   }
  // if (RemoteXY.stopExercise ==1)
 }
 
-void runCheck(){
-  unsigned long previousMillis;
-  unsigned long period = 1000;
-//https://circuitdigest.com/microcontroller-projects/arduino-multitasking-using-millis-in-arduino
-}
+
 
 
 int32_t toInt(int r,int g,int b) {
