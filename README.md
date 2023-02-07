@@ -12,4 +12,5 @@
 
 
 ### Project allowing a phone to send text prompts straight to the boat's cox or bowman.
-[Engineering Drawings.pdf](https://github.com/wrenfannin/CoxRemote/files/10673679/Engineering.Drawings.pdf)
+![image](https://user-images.githubusercontent.com/64269332/217210949-76795171-b765-4af0-ad07-336bb91a5931.png)
+
