@@ -11,4 +11,4 @@
 
 
 
-### Project allowing a phone to send text prompts straight to the boat's cox.
+### Project allowing a phone to send text prompts straight to the boat's cox or bowman.
